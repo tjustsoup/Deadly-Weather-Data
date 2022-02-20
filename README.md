@@ -13,7 +13,7 @@ This will install all the dependencies required and listed in the package.json, 
 You may have to run `npm install --force` to force the dependencies. It's okay, they don't mind.
 
 ### 2. Add your mapbox token.
-In the index.tsx file at the end of the code, copy and paste your mapbox token.
+In the App.tsx file at the end of the code (line 266), copy and paste your mapbox token.
 
 ### 3. Start using `npm start`.
 This will pull up your browser on localhost:3000.  Webpack has been persnickety recently, so the .env file should bypass the warning it likes to pop up with.  If not, the console will tell you what to do.
