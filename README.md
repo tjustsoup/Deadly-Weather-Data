@@ -28,7 +28,7 @@ This will pull up your browser on localhost:3000.  Webpack has been persnickety 
 Normally, the .gitignore file would ignore the .env file, but I need that for the one script it has.
 Webpack is being weird
 
-### Import Kepler.gl Documentation 🗺
+### Import Kepler.gl Documentation 🌎
 Using a combination of [Kepler.gl Documentation](https://docs.kepler.gl/docs/api-reference/get-started) and a [Youtube walkthrough](https://www.youtube.com/watch?v=BEZjt08Myxs), I set up the bare bones of Kepler to work in the React app.
 This includes the reducer, the data store, and the data dispatcher.
 
@@ -101,12 +101,22 @@ Whenever you run the program, this data is saved and comes right up!
 I am very proud of this. Gold star for me ⭐
 
 
-# Map Config Insertion
+# Map Config Insertion 🗺
 Once the app is up and running, and you've fiddled with the layers, filters, and interractions to your liking, next up is setting the default map config.
 In the app, in the top left corner, click "Share" > map format "json" > copy the "Map Config".
 Back in the App.tsx, at line 43 I created a variable "mapconfig" and set it equal to this block of text.
 Down below in the `React.useEffect()`, I put `config: mapconfig`, and at the very bottom I added it to `[dispatch, data, mapconfig]`.
 While this works, it results in a "Compiled with warnings," plus it not clean coding - more on this later.
+
+## Update 1 - Weather Category configuration 
+As an alternate configuration, you can now sort by "WEATHER_CATEGORY".
+Before, if you tried color coding the points by "EVENT_TYPE", you'd get a jumbled mess.
+There are way too many different event types to make the map look useful and show any significant data.
+I looked at all the different event types, categorized them myself, and made a big switch statement in the `build/arcgis.js` file that makes the new Weather Category property.
+
+If you choose to use this here are the things to change:
+ - Fill Color > *Color Gradient* > *Steps* **10**  (and set palette to something contrasting, not so much a gradient)
+ - Fill Color > *Color Based On* **WEATHER_CATEGORY*
 
 
 # 🤷‍♂️ Data Dilemmas and Potential Improvements

@@ -31,7 +31,163 @@ async function getArcGIS(offset = 0) {
         if (a.properties != null) {
           a.properties.DEATHS_TOTAL = a.properties.DEATHS_DIRECT + a.properties.DEATHS_INDIRECT;
         }
+        // Adds WEATHER_CATEGORY to supertype the EVENT_TYPE
+        if (a.properties != null) {
+            if (a.properties.EVENT_TYPE != null) {
+                switch (a.properties.EVENT_TYPE) {
+                    // Coastal
+                        case 'Coastal Flood':
+                            a.properties.WEATHER_CATEGORY = 'Coastal'
+                            break;
+                        case 'High Surf':
+                            a.properties.WEATHER_CATEGORY = 'Coastal'
+                            break;
+                        case 'Rip Current':
+                            a.properties.WEATHER_CATEGORY = 'Coastal'
+                            break;
+                        case 'Sneakerwave':
+                            a.properties.WEATHER_CATEGORY = 'Coastal'
+                            break;
+                        case 'Storm Surge/Tide':
+                            a.properties.WEATHER_CATEGORY = 'Coastal'
+                            break;
+                    
+                    // Flooding
+                        case 'Flash Flood':
+                            a.properties.WEATHER_CATEGORY = 'Flooding'
+                            break;
+                        case 'Flood':
+                            a.properties.WEATHER_CATEGORY = 'Flooding'
+                            break;
+                        case 'Lakeshore Flood':
+                            a.properties.WEATHER_CATEGORY = 'Flooding'
+                            break;
+                    
+                    // Heat
+                        case 'Excessive Heat':
+                            a.properties.WEATHER_CATEGORY = 'Heat/Fire'
+                            break;
+                        case 'Heat':
+                            a.properties.WEATHER_CATEGORY = 'Heat/Fire'
+                            break;
+                        case 'Wildfire':
+                            a.properties.WEATHER_CATEGORY = 'Heat/Fire'
+                            break;
+
+                    // Lightning
+                        case 'Lightning':
+                            a.properties.WEATHER_CATEGORY = 'Lightning'
+                            break;
+                    
+                    // Marine
+                        case 'Marine Dense Fog':
+                            a.properties.WEATHER_CATEGORY = 'Marine'
+                            break;
+                        case 'Marine High Wind':
+                            a.properties.WEATHER_CATEGORY = 'Marine'
+                            break;
+                        case 'Marine Strong Wind':
+                            a.properties.WEATHER_CATEGORY = 'Marine'
+                            break;
+                        case 'Marine Thunderstorm Wind':
+                            a.properties.WEATHER_CATEGORY = 'Marine'
+                            break;
+                        case 'Waterspout':
+                            a.properties.WEATHER_CATEGORY = 'Marine'
+                            break;
+
+                    // Other
+                        case 'Debris Flow':
+                            a.properties.WEATHER_CATEGORY = 'Other'
+                            break;
+                        case 'Dense Fog':
+                            a.properties.WEATHER_CATEGORY = 'Other'
+                            break;
+                        case 'Dust Storm':
+                            a.properties.WEATHER_CATEGORY = 'Other'
+                            break;
+
+                    // Precipitation
+                        case 'Hail':
+                            a.properties.WEATHER_CATEGORY = 'Precipitation'
+                            break;
+                        case 'Heavy Rain':
+                            a.properties.WEATHER_CATEGORY = 'Precipitation'
+                            break;
+                        case 'Sleet':
+                            a.properties.WEATHER_CATEGORY = 'Precipitation'
+                            break;
+
+                    // Storm
+                        case 'Hurricane':
+                            a.properties.WEATHER_CATEGORY = 'Storm'
+                            break;
+                        case 'Hurricane (Typhoon)':
+                            a.properties.WEATHER_CATEGORY = 'Storm'
+                            break;
+                        case 'Tropical Depression':
+                            a.properties.WEATHER_CATEGORY = 'Storm'
+                            break;
+                        case 'Tropical Storm':
+                            a.properties.WEATHER_CATEGORY = 'Storm'
+                            break;
+
+                    // Winds
+                        case 'High Wind':
+                            a.properties.WEATHER_CATEGORY = 'Winds'
+                            break;
+                        case 'Strong Wind':
+                            a.properties.WEATHER_CATEGORY = 'Winds'
+                            break;
+                        case 'Thunderstorm Wind':
+                            a.properties.WEATHER_CATEGORY = 'Winds'
+                            break;
+                        case 'Tornado':
+                            a.properties.WEATHER_CATEGORY = 'Winds'
+                            break;
+
+                    // Winter Weather
+                        case 'Avalanche':
+                            a.properties.WEATHER_CATEGORY = 'Winter Weather'
+                            break;
+                        case 'Blizzard':
+                            a.properties.WEATHER_CATEGORY = 'Winter Weather'
+                            break;
+                        case 'Cold/Wind Chill':
+                            a.properties.WEATHER_CATEGORY = 'Winter Weather'
+                            break;
+                        case 'Extreme Cold/Wind Chill':
+                            a.properties.WEATHER_CATEGORY = 'Winter Weather'
+                            break;
+                        case 'Freezing Fog':
+                            a.properties.WEATHER_CATEGORY = 'Winter Weather'
+                            break;
+                        case 'Frost/Freeze':
+                            a.properties.WEATHER_CATEGORY = 'Winter Weather'
+                            break;
+                        case 'Heavy Snow':
+                            a.properties.WEATHER_CATEGORY = 'Winter Weather'
+                            break;
+                        case 'Ice Storm':
+                            a.properties.WEATHER_CATEGORY = 'Winter Weather'
+                            break;
+                        case 'Lake Effect Snow':
+                            a.properties.WEATHER_CATEGORY = 'Winter Weather'
+                            break;
+                        case 'Winter Storm':
+                            a.properties.WEATHER_CATEGORY = 'Winter Weather'
+                            break;
+                        case 'Winter Weather':
+                            a.properties.WEATHER_CATEGORY = 'Winter Weather'
+                            break;
+                    default:
+                        break;
+                }
+            }
+        }
+
       });
+
     if (response.data.properties) {
         if (response.data.properties.exceededTransferLimit) {
             return data.concat(await getArcGIS(offset + 2000))

@@ -6,6 +6,7 @@
 .pnp.js
 
 # production
+/public/arcgisdata.json
 
 # misc
 .DS_Store
